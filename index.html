@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materi Ajar Interaktif IPA IX - Tekanan Zat Padat</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            800: '#115e59',
+                            900: '#134e4a',
+                        },
+                        accent: {
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts Inter & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+        .tab-btn.active {
+            background-color: #0d9488;
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.25);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen flex flex-col justify-between selection:bg-teal-500 selection:text-white">
+
+    <!-- Top Header & Navigation -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 sm:h-20">
+                <!-- Logo & Title -->
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('pendahuluan')">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-tr from-teal-600 to-cyan-500 flex items-center justify-center text-white shadow-md shadow-teal-500/20">
+                        <i class="fa-solid font-bold text-xl sm:text-2xl fa-compress"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-teal-600 block">IPA Kelas IX SMP/MTs</span>
+                        <h1 class="text-lg sm:text-xl font-black text-slate-800 tracking-tight leading-none">Tekanan Zat Padat</h1>
+                    </div>
+                </div>
+
+                <!-- Author Badge Header (Desktop) -->
+                <div class="hidden md:flex items-center bg-teal-50 border border-teal-200 rounded-full py-1.5 px-4 space-x-3">
+                    <div class="w-8 h-8 rounded-full bg-teal-600 text-white flex items-center justify-center font-bold text-xs shadow-sm">
+                        MK
+                    </div>
+                    <div class="text-left">
+                        <p class="text-xs font-bold text-slate-800">Mohamad Kholish Widodo, S.Pd., M.Pd.</p>
+                        <p class="text-[10px] text-teal-700 font-medium">MTsN 1 Kota Malang</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Navigation Buttons -->
+            <nav class="flex space-x-1 sm:space-x-2 overflow-x-auto pb-2 scrollbar-none text-xs sm:text-sm font-semibold">
+                <button onclick="switchTab('pendahuluan')" id="tab-pendahuluan" class="tab-btn active px-4 py-2.5 rounded-xl transition-all duration-200 flex items-center space-x-2 whitespace-nowrap">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Pendahuluan</span>
+                </button>
+                <button onclick="switchTab('materi')" id="tab-materi" class="tab-btn px-4 py-2.5 rounded-xl transition-all duration-200 flex items-center space-x-2 text-slate-600 hover:bg-slate-100 whitespace-nowrap">
+                    <i class="fa-solid fa-book-open"></i>
+                    <span>Materi & Konsep</span>
+                </button>
+                <button onclick="switchTab('lab')" id="tab-lab" class="tab-btn px-4 py-2.5 rounded-xl transition-all duration-200 flex items-center space-x-2 text-slate-600 hover:bg-slate-100 whitespace-nowrap">
+                    <i class="fa-solid fa-flask"></i>
+                    <span>Lab Virtual</span>
+                </button>
+                <button onclick="switchTab('kuis')" id="tab-kuis" class="tab-btn px-4 py-2.5 rounded-xl transition-all duration-200 flex items-center space-x-2 text-slate-600 hover:bg-slate-100 whitespace-nowrap">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    <span>Kuis Interaktif</span>
+                </button>
+                <button onclick="switchTab('penyusun')" id="tab-penyusun" class="tab-btn px-4 py-2.5 rounded-xl transition-all duration-200 flex items-center space-x-2 text-slate-600 hover:bg-slate-100 whitespace-nowrap">
+                    <i class="fa-solid fa-user-graduate"></i>
+                    <span>Identitas Penyusun</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 flex-grow w-full">
+
+        <!-- SECTION 1: PENDAHULUAN -->
+        <section id="sec-pendahuluan" class="space-y-8 animate-fadeIn">
+            <!-- Hero Banner -->
+            <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-teal-700 via-teal-800 to-slate-900 text-white p-6 sm:p-10 shadow-xl">
+                <div class="absolute -right-10 -bottom-10 opacity-10 text-[200px] pointer-events-none">
+                    <i class="fa-solid fa-shoe-prints"></i>
+                </div>
+                <div class="relative z-10 max-w-3xl space-y-4">
+                    <span class="inline-block px-3 py-1 bg-amber-400 text-slate-900 font-extrabold text-xs rounded-full uppercase tracking-wider">
+                        Apersepsi Sains
+                    </span>
+                    <h2 class="text-2xl sm:text-4xl font-black leading-tight">
+                        Mengapa Sepatu High Heels Lebih Dalam Menancap di Tanah Dibanding Sepatu Datar?
+                    </h2>
+                    <p class="text-teal-100 text-sm sm:text-base leading-relaxed">
+                        Pernahkah kamu memperhatikan jejak kaki seseorang saat berjalan di tanah berlumpur atau pasir? Mengapa sepatu berhak tinggi (*high heels*) menyebabkannya lebih mudah terperosok dibanding sepatu bertumit datar, meskipun berat badannya sama? Mari kita temukan jawabannya melalui modul interaktif ini!
+                    </p>
+                    <div class="pt-2 flex flex-wrap gap-3">
+                        <button onclick="switchTab('lab')" class="bg-amber-400 hover:bg-amber-300 text-slate-900 font-bold px-5 py-2.5 rounded-xl shadow-lg transition-all flex items-center space-x-2">
+                            <span>Mulai Simulasi Lab</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                        <button onclick="switchTab('materi')" class="bg-white/10 hover:bg-white/20 text-white border border-white/20 font-semibold px-5 py-2.5 rounded-xl transition-all">
+                            Pelajari Konsep
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Learning Objectives & Competencies -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Capaian Pembelajaran -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4 hover:border-teal-300 transition-all">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-xl bg-teal-100 text-teal-700 flex items-center justify-center font-bold text-lg">
+                            <i class="fa-solid fa-bullseye"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-800">Capaian Pembelajaran (CP)</h3>
+                    </div>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Peserta didik mampu memahami konsep tekanan pada zat padat dan dampaknya dalam kehidupan sehari-hari, serta mampu melakukan penyelidikan ilmiah sederhana untuk membuktikan faktor-faktor yang mempengaruhi besarnya tekanan.
+                    </p>
+                </div>
+
+                <!-- Tujuan Pembelajaran -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4 hover:border-teal-300 transition-all">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-bold text-lg">
+                            <i class="fa-solid fa-list-check"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-800">Tujuan Pembelajaran</h3>
+                    </div>
+                    <ul class="space-y-2 text-slate-600 text-sm">
+                        <li class="flex items-start space-x-2">
+                            <i class="fa-solid fa-circle-check text-teal-500 mt-1"></i>
+                            <span>Menjelaskan definisi tekanan zat padat secara komprehensif.</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <i class="fa-solid fa-circle-check text-teal-500 mt-1"></i>
+                            <span>Menganalisis hubungan antara gaya tekannya (F) dan luas alas penampang (A) terhadap besarnya tekanan (P).</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <i class="fa-solid fa-circle-check text-teal-500 mt-1"></i>
+                            <span>Menerapkan rumus matematika P = F / A dalam pemecahan masalah sederhana.</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <i class="fa-solid fa-circle-check text-teal-500 mt-1"></i>
+                            <span>Mengidentifikasi penerapan konsep tekanan zat padat pada kehidupan sehari-hari.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Apersepsi Quick Interactive Poll / Brainstorming -->
+            <div class="bg-gradient-to-r from-teal-500 to-cyan-600 rounded-2xl p-6 text-white shadow-md">
+                <h3 class="text-lg font-bold mb-3 flex items-center space-x-2">
+                    <i class="fa-solid fa-lightbulb text-amber-300"></i>
+                    <span>Tebakan Cepat: Manakah yang Menghasilkan Bekas Lebih Dalam?</span>
+                </h3>
+                <p class="text-sm text-teal-50 font-light mb-4">
+                    Jika sebuah balok besi yang sama ditekan pada adonan plastisin dengan dua posisi berbeda: posisi berdiri (luas penampang kecil) dan posisi tidur (luas penampang besar) dengan gaya tekan yang sama. Manakah yang masuk lebih dalam?
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <button onclick="checkApersepsi(1)" class="p-4 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-left transition-all flex items-center space-x-3 group">
+                        <div class="w-8 h-8 rounded-full bg-white text-teal-700 font-bold flex items-center justify-center shrink-0">A</div>
+                        <span class="text-sm font-semibold group-hover:text-amber-200">Posisi Berdiri (Luas penampang alas kecil)</span>
+                    </button>
+                    <button onclick="checkApersepsi(2)" class="p-4 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-left transition-all flex items-center space-x-3 group">
+                        <div class="w-8 h-8 rounded-full bg-white text-teal-700 font-bold flex items-center justify-center shrink-0">B</div>
+                        <span class="text-sm font-semibold group-hover:text-amber-200">Posisi Tidur (Luas penampang alas besar)</span>
+                    </button>
+                </div>
+                <div id="apersepsi-feedback" class="hidden mt-4 p-4 rounded-xl bg-white text-slate-800 text-sm font-medium shadow-sm transition-all"></div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: MATERI & KONSEP -->
+        <section id="sec-materi" class="hidden space-y-8 animate-fadeIn">
+            <!-- Header Title -->
+            <div class="border-b border-slate-200 pb-4">
+                <span class="text-xs font-extrabold text-teal-600 uppercase tracking-widest">Konsep Dasar Fisika</span>
+                <h2 class="text-2xl sm:text-3xl font-black text-slate-800">Pemahaman Tekanan Zat Padat</h2>
+            </div>
+
+            <!-- Basic Definition Card -->
+            <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                    <div class="md:col-span-2 space-y-4">
+                        <h3 class="text-xl font-bold text-slate-800">Apa itu Tekanan Zat Padat?</h3>
+                        <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                            <strong class="text-teal-700">Tekanan</strong> adalah besarnya gaya yang bekerja pada tiap satu satuan luas permukaan bidang tekan.
+                            Ketika sebuah benda padat diletakkan di atas suatu permukaan, benda tersebut memberikan gaya tekan berupa <i>gaya berat (F)</i> ke bawah pada bidang sentuhnya (A).
+                        </p>
+                        <div class="bg-slate-50 p-4 rounded-xl border-l-4 border-teal-500 text-sm text-slate-700 space-y-1">
+                            <p class="font-bold text-teal-800">Kesimpulan Penting:</p>
+                            <ul class="list-disc list-inside space-y-1 text-slate-600">
+                                <li>Semakin **besar Gaya Tekan (F)**, maka Tekanan (P) akan semakin **besar** (Sebanding).</li>
+                                <li>Semakin **kecil Luas Alas (A)**, maka Tekanan (P) akan semakin **besar** (Berbanding Terbalik).</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Formula Box -->
+                    <div class="bg-gradient-to-br from-teal-600 to-teal-800 text-white p-6 rounded-2xl shadow-lg text-center space-y-3">
+                        <span class="text-xs font-semibold uppercase tracking-widest text-teal-200">Persamaan Matematis</span>
+                        <div class="text-3xl sm:text-4xl font-black tracking-widest bg-white/10 py-3 px-4 rounded-xl border border-white/20">
+                            P = F / A
+                        </div>
+                        <div class="text-xs text-teal-100 text-left space-y-1 pt-2 border-t border-teal-500/50">
+                            <p><strong>P</strong> = Tekanan (N/m² atau Pascal / Pa)</p>
+                            <p><strong>F</strong> = Gaya tekan (Newton / N)</p>
+                            <p><strong>A</strong> = Luas bidang tekan (m²)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Formula Calculator -->
+            <div class="bg-teal-50 border border-teal-200 rounded-2xl p-6 sm:p-8 space-y-6">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-xl bg-teal-600 text-white flex items-center justify-center font-bold">
+                        <i class="fa-solid fa-calculator"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-800">Kalkulator Interaktif Tekanan</h3>
+                        <p class="text-xs text-slate-600">Coba ubah nilai Gaya dan Luas Alas untuk melihat perubahan besarnya Tekanan secara real-time.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Gaya Input -->
+                    <div class="bg-white p-4 rounded-xl border border-teal-100 space-y-2 shadow-sm">
+                        <label class="text-xs font-bold text-slate-700 block">Gaya Tekan / Berat (F)</label>
+                        <div class="flex items-center space-x-2">
+                            <input type="range" id="calc-f" min="10" max="500" value="100" class="w-full accent-teal-600" oninput="updateCalculator()">
+                            <span id="calc-f-val" class="font-bold text-teal-700 text-sm w-16 text-right">100 N</span>
+                        </div>
+                    </div>
+
+                    <!-- Luas Input -->
+                    <div class="bg-white p-4 rounded-xl border border-teal-100 space-y-2 shadow-sm">
+                        <label class="text-xs font-bold text-slate-700 block">Luas Alas (A)</label>
+                        <div class="flex items-center space-x-2">
+                            <input type="range" id="calc-a" min="0.01" max="2.0" step="0.01" value="0.25" class="w-full accent-teal-600" oninput="updateCalculator()">
+                            <span id="calc-a-val" class="font-bold text-teal-700 text-sm w-16 text-right">0.25 m²</span>
+                        </div>
+                    </div>
+
+                    <!-- Result Box -->
+                    <div class="bg-white p-4 rounded-xl border-2 border-teal-500 flex flex-col justify-center items-center shadow-sm">
+                        <span class="text-xs font-bold text-slate-500 uppercase">Hasil Tekanan (P)</span>
+                        <div id="calc-p-res" class="text-2xl sm:text-3xl font-black text-teal-700">400 N/m²</div>
+                        <span class="text-[11px] text-slate-400">( setara dengan 400 Pascal )</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Application Examples Grid -->
+            <div class="space-y-4">
+                <h3 class="text-xl font-bold text-slate-800">Penerapan Konsep dalam Kehidupan Sehari-hari</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Example 1 -->
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3 hover:shadow-md transition-all">
+                        <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-xl font-bold">
+                            <i class="fa-solid fa-utensils"></i>
+                        </div>
+                        <h4 class="font-bold text-slate-800">Pisau Runcing & Tajam</h4>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Mata pisau dibuat sangat tipis agar **luas bidang tekan (A) kecil**, sehingga dengan gaya tangan yang sedikit saja dapat menghasilkan **tekanan (P) yang sangat besar** untuk memotong makanan.
+                        </p>
+                    </div>
+
+                    <!-- Example 2 -->
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3 hover:shadow-md transition-all">
+                        <div class="w-12 h-12 rounded-xl bg-teal-100 text-teal-600 flex items-center justify-center text-xl font-bold">
+                            <i class="fa-solid fa-truck-monster"></i>
+                        </div>
+                        <h4 class="font-bold text-slate-800">Ban Truk Besar & Lebar</h4>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Truk pengangkut beban berat menggunakan banyak roda yang lebar untuk **perbesar luas penampang (A)**. Hal ini bertujuan agar **tekanan (P) ke jalan berkurang**, sehingga jalan tidak cepat rusak atau amblas.
+                        </p>
+                    </div>
+
+                    <!-- Example 3 -->
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3 hover:shadow-md transition-all">
+                        <div class="w-12 h-12 rounded-xl bg-cyan-100 text-cyan-600 flex items-center justify-center text-xl font-bold">
+                            <i class="fa-solid fa-crow"></i>
+                        </div>
+                        <h4 class="font-bold text-slate-800">Kaki Bebek vs Kaki Ayam</h4>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Kaki bebek memiliki selaput yang **memperbesar luas penampang (A)**, sehingga saat berjalan di tanah lumpur basah, bebek **tidak mudah terperosok** karena tekannya kecil dibanding kaki ayam yang lancip.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: LABORATORIUM VIRTUAL -->
+        <section id="sec-lab" class="hidden space-y-8 animate-fadeIn">
+            <!-- Header -->
+            <div class="border-b border-slate-200 pb-4 flex flex-wrap justify-between items-end gap-2">
+                <div>
+                    <span class="text-xs font-extrabold text-teal-600 uppercase tracking-widest">Praktikum Digital Interaktif</span>
+                    <h2 class="text-2xl sm:text-3xl font-black text-slate-800">Laboratorium Virtual Tekanan</h2>
+                </div>
+                <button onclick="resetLab()" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs font-bold rounded-xl transition-all flex items-center space-x-2">
+                    <i class="fa-solid fa-rotate-left"></i>
+                    <span>Reset Praktikum</span>
+                </button>
+            </div>
+
+            <!-- Main Interactive Lab Canvas & Controls -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Controls Panel (Left) -->
+                <div class="lg:col-span-5 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                    <h3 class="text-lg font-bold text-slate-800 border-b border-slate-100 pb-3 flex items-center space-x-2">
+                        <i class="fa-solid fa-sliders text-teal-600"></i>
+                        <span>Pengaturan Variabel</span>
+                    </h3>
+
+                    <!-- Choice 1: Pre-set Presets -->
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold text-slate-700 block">Pilih Benda / Skenario Eksperimen</label>
+                        <select id="lab-preset" onchange="applyPreset()" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-xs sm:text-sm font-semibold text-slate-800 focus:ring-2 focus:ring-teal-500 outline-none">
+                            <option value="custom">-- Custom (Pengaturan Bebas) --</option>
+                            <option value="highheels">Sepatu High Heels (Luas Kecil)</option>
+                            <option value="flatshoes">Sepatu Datar / Kets (Luas Besar)</option>
+                            <option value="paku">Paku Runcing vs Tumpul</option>
+                        </select>
+                    </div>
+
+                    <!-- Control 1: Gaya Tekan (F) -->
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center text-xs font-bold">
+                            <span class="text-slate-700">Gaya Tekan / Massa Benda (F)</span>
+                            <span id="lab-f-display" class="text-teal-700 font-extrabold text-sm">50 N</span>
+                        </div>
+                        <input type="range" id="lab-f-slider" min="10" max="200" step="5" value="50" oninput="updateLabSimulation()" class="w-full accent-teal-600 cursor-pointer">
+                        <div class="flex justify-between text-[10px] text-slate-400 font-medium">
+                            <span>10 N (Ringan)</span>
+                            <span>200 N (Sangat Berat)</span>
+                        </div>
+                    </div>
+
+                    <!-- Control 2: Luas Penampang (A) -->
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center text-xs font-bold">
+                            <span class="text-slate-700">Luas Alas Benda (A)</span>
+                            <span id="lab-a-display" class="text-teal-700 font-extrabold text-sm">0.05 m²</span>
+                        </div>
+                        <input type="range" id="lab-a-slider" min="0.005" max="0.20" step="0.005" value="0.05" oninput="updateLabSimulation()" class="w-full accent-teal-600 cursor-pointer">
+                        <div class="flex justify-between text-[10px] text-slate-400 font-medium">
+                            <span>0.005 m² (Runcing/Kecil)</span>
+                            <span>0.20 m² (Lebar/Luas)</span>
+                        </div>
+                    </div>
+
+                    <!-- Medium Choice -->
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold text-slate-700 block">Landasan Tekan (Medium)</label>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button onclick="setMedium('plastisin')" id="med-plastisin" class="py-2.5 px-3 rounded-xl border border-teal-500 bg-teal-50 text-teal-800 text-xs font-bold transition-all text-center">
+                                Plastisin / Lilin
+                            </button>
+                            <button onclick="setMedium('spons')" id="med-spons" class="py-2.5 px-3 rounded-xl border border-slate-200 bg-white text-slate-600 text-xs font-bold transition-all text-center">
+                                Spons Empuk
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Record Data Button -->
+                    <button onclick="recordLabData()" class="w-full py-3 bg-teal-600 hover:bg-teal-700 text-white font-bold rounded-xl shadow-md transition-all flex items-center justify-center space-x-2 text-sm">
+                        <i class="fa-solid fa-plus-circle"></i>
+                        <span>Catat Hasil Ke Tabel Observation</span>
+                    </button>
+                </div>
+
+                <!-- Simulation Visualizer (Right) -->
+                <div class="lg:col-span-7 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+                    <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+                        <h3 class="text-base font-bold text-slate-800 flex items-center space-x-2">
+                            <i class="fa-solid fa-eye text-teal-600"></i>
+                            <span>Visualisasi Real-Time</span>
+                        </h3>
+                        <span id="lab-p-badge" class="px-3 py-1 bg-teal-100 text-teal-800 font-extrabold text-xs sm:text-sm rounded-full">
+                            P = 1000 Pa
+                        </span>
+                    </div>
+
+                    <!-- Interactive Canvas Container -->
+                    <div class="relative w-full h-64 sm:h-80 bg-slate-100 rounded-xl overflow-hidden border border-slate-200 flex items-center justify-center">
+                        <canvas id="labCanvas" class="w-full h-full block"></canvas>
+                    </div>
+
+                    <!-- Real-time Meter Readings -->
+                    <div class="grid grid-cols-3 gap-2 text-center">
+                        <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                            <span class="text-[10px] text-slate-500 uppercase font-bold block">Gaya (F)</span>
+                            <span id="meter-f" class="text-sm sm:text-base font-black text-slate-800">50 N</span>
+                        </div>
+                        <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                            <span class="text-[10px] text-slate-500 uppercase font-bold block">Luas (A)</span>
+                            <span id="meter-a" class="text-sm sm:text-base font-black text-slate-800">0.05 m²</span>
+                        </div>
+                        <div class="bg-teal-50 p-3 rounded-xl border border-teal-200">
+                            <span class="text-[10px] text-teal-600 uppercase font-bold block">Kedalaman Tancapan</span>
+                            <span id="meter-depth" class="text-sm sm:text-base font-black text-teal-700">1.2 cm</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Table of Observation Data -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-lg font-bold text-slate-800 flex items-center space-x-2">
+                        <i class="fa-solid fa-table text-teal-600"></i>
+                        <span>Tabel Hasil Pengamatan Praktikum</span>
+                    </h3>
+                    <button onclick="clearLabTable()" class="text-xs text-red-500 hover:text-red-700 font-semibold underline">
+                        Hapus Semua Data
+                    </button>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-xs sm:text-sm">
+                        <thead>
+                            <tr class="bg-slate-100 text-slate-700 border-b border-slate-200">
+                                <th class="p-3 font-bold">No</th>
+                                <th class="p-3 font-bold">Medium</th>
+                                <th class="p-3 font-bold">Gaya Tekan F (N)</th>
+                                <th class="p-3 font-bold">Luas Alas A (m²)</th>
+                                <th class="p-3 font-bold">Tekanan P (Pa)</th>
+                                <th class="p-3 font-bold">Kedalaman Bekas</th>
+                            </tr>
+                        </thead>
+                        <tbody id="lab-table-body" class="divide-y divide-slate-100 text-slate-600">
+                            <tr>
+                                <td colspan="6" class="p-4 text-center text-slate-400 italic">Belum ada data dicatat. Silakan klik "Catat Hasil Ke Tabel" di atas.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: KUIS INTERAKTIF -->
+        <section id="sec-kuis" class="hidden space-y-8 animate-fadeIn">
+            <!-- Header -->
+            <div class="border-b border-slate-200 pb-4">
+                <span class="text-xs font-extrabold text-teal-600 uppercase tracking-widest">Uji Pemahaman</span>
+                <h2 class="text-2xl sm:text-3xl font-black text-slate-800">Kuis Evaluasi Mandiri</h2>
+            </div>
+
+            <!-- Quiz Main Container -->
+            <div id="quiz-container" class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                <!-- Progress Header -->
+                <div class="flex justify-between items-center text-xs font-bold text-slate-500 border-b border-slate-100 pb-4">
+                    <span id="quiz-progress-text">Soal 1 dari 5</span>
+                    <span id="quiz-score-badge" class="text-teal-700 bg-teal-50 px-3 py-1 rounded-full border border-teal-200">Skor Sementara: 0</span>
+                </div>
+
+                <!-- Question Text -->
+                <div class="space-y-2">
+                    <h3 id="quiz-question" class="text-lg sm:text-xl font-bold text-slate-800 leading-snug">
+                        <!-- Question inserted via JS -->
+                    </h3>
+                </div>
+
+                <!-- Options -->
+                <div id="quiz-options" class="space-y-3">
+                    <!-- Options inserted via JS -->
+                </div>
+
+                <!-- Explanation / Feedback Box -->
+                <div id="quiz-explanation" class="hidden p-4 rounded-xl text-xs sm:text-sm leading-relaxed"></div>
+
+                <!-- Action Footer -->
+                <div class="flex justify-end pt-4 border-t border-slate-100">
+                    <button id="quiz-next-btn" onclick="nextQuestion()" disabled class="px-6 py-2.5 bg-slate-300 text-slate-500 font-bold text-sm rounded-xl transition-all cursor-not-allowed">
+                        Lanjut Soal <i class="fa-solid fa-chevron-right ml-1"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quiz Completed Summary View (Hidden by Default) -->
+            <div id="quiz-result" class="hidden bg-white p-8 rounded-2xl border border-slate-200 shadow-lg text-center space-y-6">
+                <div class="w-20 h-20 bg-teal-100 text-teal-600 rounded-full flex items-center justify-center text-3xl font-black mx-auto shadow-inner">
+                    <i class="fa-solid fa-trophy"></i>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-black text-slate-800">Kuis Selesai!</h3>
+                    <p class="text-slate-600 text-sm mt-1">Berikut adalah hasil pencapaian pemahaman materi kamu:</p>
+                </div>
+
+                <div class="max-w-xs mx-auto bg-slate-50 p-6 rounded-2xl border border-slate-200 space-y-2">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Skor Akhir Kamu</span>
+                    <div id="quiz-final-score" class="text-5xl font-black text-teal-600">0</div>
+                    <p id="quiz-grade-text" class="text-xs font-bold text-slate-600 pt-2"></p>
+                </div>
+
+                <div class="pt-4 flex justify-center space-x-4">
+                    <button onclick="restartQuiz()" class="px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white font-bold text-sm rounded-xl transition-all shadow-md">
+                        <i class="fa-solid fa-rotate-right mr-2"></i>Coba Lagi
+                    </button>
+                    <button onclick="switchTab('penyusun')" class="px-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-sm rounded-xl transition-all">
+                        Lihat Profil Penyusun
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: IDENTITAS PENYUSUN -->
+        <section id="sec-penyusun" class="hidden space-y-8 animate-fadeIn">
+            <div class="max-w-3xl mx-auto bg-white p-8 sm:p-10 rounded-3xl border border-slate-200 shadow-xl space-y-8">
+                <!-- Author Header -->
+                <div class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6 text-center sm:text-left border-b border-slate-100 pb-8">
+                    <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-gradient-to-tr from-teal-600 to-cyan-500 text-white flex items-center justify-center font-black text-3xl shadow-lg shadow-teal-500/30 shrink-0">
+                        MKW
+                    </div>
+                    <div class="space-y-1">
+                        <span class="px-3 py-1 bg-teal-100 text-teal-800 text-[11px] font-extrabold uppercase tracking-wider rounded-full">
+                            Penyusun Modul Ajar
+                        </span>
+                        <h2 class="text-2xl sm:text-3xl font-black text-slate-800">
+                            Mohamad Kholish Widodo, S.Pd., M.Pd.
+                        </h2>
+                        <p class="text-slate-600 font-semibold text-sm">
+                            Guru IPA Terpadu — <span class="text-teal-700">MTsN 1 Kota Malang</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Profile Details -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm">
+                    <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+                        <span class="text-slate-400 font-bold block uppercase text-[10px]">Instansi / Sekolah</span>
+                        <p class="font-bold text-slate-800">MTs Negeri 1 Kota Malang</p>
+                    </div>
+                    <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+                        <span class="text-slate-400 font-bold block uppercase text-[10px]">Mata Pelajaran</span>
+                        <p class="font-bold text-slate-800">Ilmu Pengetahuan Alam (IPA)</p>
+                    </div>
+                    <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+                        <span class="text-slate-400 font-bold block uppercase text-[10px]">Sasaran Kelas</span>
+                        <p class="font-bold text-slate-800">Kelas IX (Sembilan) SMP/MTs</p>
+                    </div>
+                    <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+                        <span class="text-slate-400 font-bold block uppercase text-[10px]">Materi Pokok</span>
+                        <p class="font-bold text-slate-800">Tekanan Zat Padat & Aplikasinya</p>
+                    </div>
+                </div>
+
+                <!-- Message / Motto -->
+                <div class="bg-gradient-to-r from-teal-50 to-cyan-50 p-6 rounded-2xl border border-teal-200 text-slate-700 space-y-2 text-xs sm:text-sm italic">
+                    <p class="font-bold text-teal-800 non-italic">Pesan Pembelajaran:</p>
+                    <p>
+                        "Sains bukan sekadar menghafal rumus, melainkan memahami fenomena di sekitar kita dan bagaimana prinsip fisika bekerja mempermudah kehidupan manusia sehari-hari. Selamat belajar dan teruslah bereksplorasi!"
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-6 mt-12">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-500 space-y-1">
+            <p class="font-bold text-slate-700">Materi Ajar Interaktif IPA Kelas IX — Tekanan Zat Padat</p>
+            <p>Disusun oleh: <span class="font-bold text-teal-700">Mohamad Kholish Widodo, S.Pd., M.Pd.</span> (MTsN 1 Kota Malang)</p>
+            <p class="text-[10px] text-slate-400 pt-2">© 2026 Pembelajaran IPA Interaktif. Hak Cipta Dilindungi.</p>
+        </div>
+    </footer>
+
+    <!-- Custom Modal Container (Replaces alert) -->
+    <div id="custom-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
+        <div class="bg-white rounded-2xl p-6 max-w-sm w-full space-y-4 shadow-2xl animate-scaleUp">
+            <div id="modal-icon" class="w-12 h-12 rounded-full bg-teal-100 text-teal-600 flex items-center justify-center text-2xl font-bold mx-auto">
+                <i class="fa-solid fa-circle-info"></i>
+            </div>
+            <div class="text-center space-y-1">
+                <h4 id="modal-title" class="font-bold text-lg text-slate-800">Pemberitahuan</h4>
+                <p id="modal-message" class="text-xs text-slate-600 leading-relaxed"></p>
+            </div>
+            <button onclick="closeModal()" class="w-full py-2.5 bg-teal-600 hover:bg-teal-700 text-white text-xs font-bold rounded-xl transition-all">
+                Mengerti
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let currentMedium = 'plastisin';
+        let labHistory = [];
+
+        // Tab Switching Function
+        function switchTab(tabId) {
+            const tabs = ['pendahuluan', 'materi', 'lab', 'kuis', 'penyusun'];
+            
+            tabs.forEach(t => {
+                const sec = document.getElementById(`sec-${t}`);
+                const btn = document.getElementById(`tab-${t}`);
+                
+                if (t === tabId) {
+                    sec.classList.remove('hidden');
+                    btn.classList.add('active');
+                    btn.classList.remove('text-slate-600', 'hover:bg-slate-100');
+                } else {
+                    sec.classList.add('hidden');
+                    btn.classList.remove('active');
+                    btn.classList.add('text-slate-600', 'hover:bg-slate-100');
+                }
+            });
+
+            // Re-render canvas if switching to lab tab
+            if (tabId === 'lab') {
+                setTimeout(() => {
+                    resizeCanvas();
+                    updateLabSimulation();
+                }, 50);
+            }
+        }
+
+        function checkApersepsi(option) {
+            const feedback = document.getElementById('apersepsi-feedback');
+            feedback.classList.remove('hidden');
+
+            if (option === 1) {
+                feedback.className = "mt-4 p-4 rounded-xl bg-teal-100 text-teal-900 text-sm font-medium border border-teal-300 shadow-sm";
+                feedback.innerHTML = `<strong><i class="fa-solid fa-circle-check text-teal-600 mr-1"></i> Tepat Sekali!</strong><br>
+                Posisi berdiri memiliki **luas penampang alas (A) yang lebih kecil**. Dengan gaya tekan yang sama, luas penampang yang kecil akan menghasilkan **tekanan (P) yang jauh lebih besar**, sehingga balok masuk lebih dalam ke plastisin.`;
+            } else {
+                feedback.className = "mt-4 p-4 rounded-xl bg-amber-100 text-amber-900 text-sm font-medium border border-amber-300 shadow-sm";
+                feedback.innerHTML = `<strong><i class="fa-solid fa-circle-xmark text-amber-600 mr-1"></i> Kurang Tepat!</strong><br>
+                Posisi tidur memiliki luas penampang alas (A) yang besar, sehingga menyebarkan gaya tekan ke area yang lebih luas. Hal ini membuat **tekanannya lebih kecil** dan bekas tancapannya lebih dangkal. Coba cek simulasi di tab Lab Virtual!`;
+            }
+        }
+
+        function updateCalculator() {
+            const f = parseFloat(document.getElementById('calc-f').value);
+            const a = parseFloat(document.getElementById('calc-a').value);
+            
+            document.getElementById('calc-f-val').innerText = `${f} N`;
+            document.getElementById('calc-a-val').innerText = `${a.toFixed(2)} m²`;
+
+            const p = f / a;
+            document.getElementById('calc-p-res').innerText = `${p.toFixed(0)} N/m²`;
+        }
+
+        const canvas = document.getElementById('labCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            if (!canvas) return;
+            const container = canvas.parentElement;
+            canvas.width = container.clientWidth;
+            canvas.height = container.clientHeight;
+        }
+
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            updateLabSimulation();
+        });
+
+        function setMedium(med) {
+            currentMedium = med;
+            const btnPlastisin = document.getElementById('med-plastisin');
+            const btnSpons = document.getElementById('med-spons');
+
+            if (med === 'plastisin') {
+                btnPlastisin.className = "py-2.5 px-3 rounded-xl border border-teal-500 bg-teal-50 text-teal-800 text-xs font-bold transition-all text-center";
+                btnSpons.className = "py-2.5 px-3 rounded-xl border border-slate-200 bg-white text-slate-600 text-xs font-bold transition-all text-center";
+            } else {
+                btnSpons.className = "py-2.5 px-3 rounded-xl border border-teal-500 bg-teal-50 text-teal-800 text-xs font-bold transition-all text-center";
+                btnPlastisin.className = "py-2.5 px-3 rounded-xl border border-slate-200 bg-white text-slate-600 text-xs font-bold transition-all text-center";
+            }
+            updateLabSimulation();
+        }
+
+        function applyPreset() {
+            const preset = document.getElementById('lab-preset').value;
+            const fSlider = document.getElementById('lab-f-slider');
+            const aSlider = document.getElementById('lab-a-slider');
+
+            if (preset === 'highheels') {
+                fSlider.value = 60;
+                aSlider.value = 0.005;
+            } else if (preset === 'flatshoes') {
+                fSlider.value = 60;
+                aSlider.value = 0.12;
+            } else if (preset === 'paku') {
+                fSlider.value = 100;
+                aSlider.value = 0.005;
+            }
+            updateLabSimulation();
+        }
+
+        function updateLabSimulation() {
+            if (!ctx) return;
+
+            const f = parseFloat(document.getElementById('lab-f-slider').value);
+            const a = parseFloat(document.getElementById('lab-a-slider').value);
+
+            // Calculate Pressure
+            const p = f / a; // Pa
+
+            // Calculate indentation depth in cm based on medium elasticity factor
+            const elasticityFactor = currentMedium === 'spons' ? 0.0004 : 0.00025;
+            let depthCm = (p * elasticityFactor).toFixed(1);
+            if (depthCm > 4.5) depthCm = 4.5; // Max depth cap for UI
+
+            // Update DOM meters
+            document.getElementById('lab-f-display').innerText = `${f} N`;
+            document.getElementById('lab-a-display').innerText = `${a.toFixed(3)} m²`;
+            document.getElementById('lab-p-badge').innerText = `P = ${Math.round(p)} Pa`;
+            document.getElementById('meter-f').innerText = `${f} N`;
+            document.getElementById('meter-a').innerText = `${a.toFixed(3)} m²`;
+            document.getElementById('meter-depth').innerText = `${depthCm} cm`;
+
+            // Draw Canvas Simulation
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            const w = canvas.width;
+            const h = canvas.height;
+
+            // Ground Level Base
+            const groundY = h * 0.65;
+            
+            // Draw Medium (Ground / Sponge / Plastisin)
+            ctx.fillStyle = currentMedium === 'plastisin' ? '#0d9488' : '#f59e0b'; // Teal for plastisin, Amber for sponge
+            ctx.fillRect(0, groundY, w, h - groundY);
+
+            // Draw Grid Pattern on medium
+            ctx.strokeStyle = 'rgba(255,255,255,0.2)';
+            ctx.lineWidth = 1;
+            for (let x = 0; x < w; x += 20) {
+                ctx.beginPath();
+                ctx.moveTo(x, groundY);
+                ctx.lineTo(x, h);
+                ctx.stroke();
+            }
+
+            // Draw Indentation (Bekas Tancapan)
+            // Width of object visual on canvas relative to A
+            const blockWidth = Math.max(30, Math.min(180, a * 1000));
+            const blockCenterX = w / 2;
+            const indentPixels = parseFloat(depthCm) * 12; // Scale cm to pixels
+
+            // Draw Deformed Medium Dip
+            ctx.beginPath();
+            ctx.fillStyle = currentMedium === 'plastisin' ? '#0f766e' : '#d97706';
+            ctx.fillRect(blockCenterX - (blockWidth / 2), groundY, blockWidth, indentPixels);
+
+            // Draw Object (Balok Tekan)
+            const blockHeight = 80;
+            const blockTopY = groundY + indentPixels - blockHeight;
+
+            // Gradient for Object
+            const gradient = ctx.createLinearGradient(0, blockTopY, 0, blockTopY + blockHeight);
+            gradient.addColorStop(0, '#64748b');
+            gradient.addColorStop(1, '#334155');
+
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.roundRect(blockCenterX - (blockWidth / 2), blockTopY, blockWidth, blockHeight, 6);
+            ctx.fill();
+            ctx.strokeStyle = '#1e293b';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Draw Force Arrow (F) downwards
+            const arrowTop = blockTopY - 45;
+            ctx.strokeStyle = '#ef4444';
+            ctx.fillStyle = '#ef4444';
+            ctx.lineWidth = 4;
+
+            ctx.beginPath();
+            ctx.moveTo(blockCenterX, arrowTop);
+            ctx.lineTo(blockCenterX, blockTopY - 10);
+            ctx.stroke();
+
+            // Arrow head
+            ctx.beginPath();
+            ctx.moveTo(blockCenterX - 8, blockTopY - 15);
+            ctx.lineTo(blockCenterX + 8, blockTopY - 15);
+            ctx.lineTo(blockCenterX, blockTopY - 5);
+            ctx.fill();
+
+            // Text Label F on Arrow
+            ctx.fillStyle = '#dc2626';
+            ctx.font = 'bold 12px Inter';
+            ctx.textAlign = 'center';
+            ctx.fillText(`F = ${f} N`, blockCenterX, arrowTop - 8);
+
+            // Label A on Block base
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 11px Inter';
+            ctx.fillText(`A = ${a.toFixed(3)} m²`, blockCenterX, blockTopY + (blockHeight / 2));
+        }
+
+        function recordLabData() {
+            const f = parseFloat(document.getElementById('lab-f-slider').value);
+            const a = parseFloat(document.getElementById('lab-a-slider').value);
+            const p = Math.round(f / a);
+            const depth = document.getElementById('meter-depth').innerText;
+            const mediumName = currentMedium === 'plastisin' ? 'Plastisin' : 'Spons';
+
+            labHistory.push({
+                no: labHistory.length + 1,
+                medium: mediumName,
+                f: f,
+                a: a.toFixed(3),
+                p: p,
+                depth: depth
+            });
+
+            renderLabTable();
+            showModal("Data Berhasil Dicatat!", "Hasil pengukuran praktikum telah ditambahkan ke tabel pengamatan.");
+        }
+
+        function renderLabTable() {
+            const tbody = document.getElementById('lab-table-body');
+            if (labHistory.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-slate-400 italic">Belum ada data dicatat. Silakan klik "Catat Hasil Ke Tabel" di atas.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = labHistory.map(row => `
+                <tr class="hover:bg-slate-50 transition-colors">
+                    <td class="p-3 font-bold text-slate-800">${row.no}</td>
+                    <td class="p-3"><span class="px-2 py-0.5 rounded-md text-[10px] font-bold ${row.medium === 'Plastisin' ? 'bg-teal-100 text-teal-800' : 'bg-amber-100 text-amber-800'}">${row.medium}</span></td>
+                    <td class="p-3 font-semibold">${row.f}</td>
+                    <td class="p-3 font-semibold">${row.a}</td>
+                    <td class="p-3 font-bold text-teal-700">${row.p}</td>
+                    <td class="p-3 font-semibold">${row.depth}</td>
+                </tr>
+            `).join('');
+        }
+
+        function clearLabTable() {
+            labHistory = [];
+            renderLabTable();
+        }
+
+        function resetLab() {
+            document.getElementById('lab-f-slider').value = 50;
+            document.getElementById('lab-a-slider').value = 0.05;
+            document.getElementById('lab-preset').value = 'custom';
+            setMedium('plastisin');
+            updateLabSimulation();
+        }
+
+        const quizData = [
+            {
+                q: "Faktor-faktor apa sajakah yang mempengaruhi besarnya tekanan pada zat padat?",
+                options: [
+                    "Gaya tekan dan luas bidang tekan",
+                    "Gaya tekan dan volume benda",
+                    "Massa jenis benda dan luas permukaan",
+                    "Luas bidang tekan dan tinggi benda"
+                ],
+                answer: 0,
+                explanation: "Berdasarkan rumus P = F / A, besarnya tekanan (P) dipengaruhi secara langsung oleh **Gaya tekan (F)** dan berbanding terbalik dengan **Luas bidang tekan (A)**."
+            },
+            {
+                q: "Sebuah balok besi memiliki berat 200 N diletakkan di atas lantai. Jika luas permukaan alas balok yang menyentuh lantai adalah 0,5 m², berapakah tekanan yang dihasilkan balok tersebut?",
+                options: [
+                    "100 N/m²",
+                    "400 N/m²",
+                    "200 N/m²",
+                    "800 N/m²"
+                ],
+                answer: 1,
+                explanation: "Diketahui F = 200 N dan A = 0,5 m².<br>Perhitungan: P = F / A = 200 / 0,5 = 400 N/m²."
+            },
+            {
+                q: "Mengapa ayam lebih sulit berjalan di tanah berlumpur dibandingkan bebek?",
+                options: [
+                    "Kaki bebek memiliki berat yang lebih ringan dari ayam",
+                    "Luas alas kaki ayam lebih besar sehingga tekannya kecil",
+                    "Luas alas kaki bebek lebih besar karena berselaput, sehingga tekannya lebih kecil",
+                    "Gaya tekan kaki ayam jauh lebih besar daripada bebek"
+                ],
+                answer: 2,
+                explanation: "Kaki bebek memiliki selaput yang memperbesar luas bidang tekan (A). Sesuai prinsip fisika, semakin besar luas penampang (A), maka tekanan (P) pada lumpur menjadi semakin kecil sehingga bebek tidak mudah terperosok."
+            },
+            {
+                q: "Dua buah benda A dan B dikenakan gaya yang sama besar. Jika luas alas A adalah 0,02 m² dan luas alas B adalah 0,08 m², perbandingan tekanan Pa : Pb adalah...",
+                options: [
+                    "1 : 4",
+                    "4 : 1",
+                    "1 : 2",
+                    "2 : 1"
+                ],
+                answer: 1,
+                explanation: "Karena Gaya (F) sama, Tekanan (P) berbanding terbalik dengan Luas (A).<br>Pa / Pb = Ab / Aa = 0,08 / 0,02 = 4 / 1. Jadi perbandingannya adalah 4 : 1."
+            },
+            {
+                q: "Upaya berikut yang dapat dilakukan untuk memperbesar tekanan pada zat padat adalah...",
+                options: [
+                    "Memperbesar gaya tekan dan memperbesar luas bidang tekan",
+                    "Memperkecil gaya tekan dan memperbesar luas bidang tekan",
+                    "Memperbesar gaya tekan dan memperkecil luas bidang tekan",
+                    "Memperkecil gaya tekan dan memperkecil luas bidang tekan"
+                ],
+                answer: 2,
+                explanation: "Untuk menghasilkan tekanan (P) yang maksimum/besar, kita harus memperbesar Gaya tekan (F) dan memperkecil Luas penampang alas (A)."
+            }
+        ];
+
+        let currentQIndex = 0;
+        let userScore = 0;
+        let selectedOption = null;
+
+        function loadQuizQuestion() {
+            const data = quizData[currentQIndex];
+            document.getElementById('quiz-progress-text').innerText = `Soal ${currentQIndex + 1} dari ${quizData.length}`;
+            document.getElementById('quiz-score-badge').innerText = `Skor Sementara: ${userScore}`;
+            document.getElementById('quiz-question').innerText = data.q;
+
+            const optionsContainer = document.getElementById('quiz-options');
+            optionsContainer.innerHTML = '';
+
+            data.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full p-4 rounded-xl border border-slate-200 text-left text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-all flex items-center space-x-3";
+                btn.onclick = () => selectOption(idx);
+                btn.innerHTML = `
+                    <div class="w-7 h-7 rounded-full bg-slate-100 text-slate-600 font-bold flex items-center justify-center shrink-0 border border-slate-300">${String.fromCharCode(65 + idx)}</div>
+                    <span>${opt}</span>
+                `;
+                optionsContainer.appendChild(btn);
+            });
+
+            // Hide explanation
+            const expBox = document.getElementById('quiz-explanation');
+            expBox.classList.add('hidden');
+
+            // Disable next button
+            const nextBtn = document.getElementById('quiz-next-btn');
+            nextBtn.disabled = true;
+            nextBtn.className = "px-6 py-2.5 bg-slate-300 text-slate-500 font-bold text-sm rounded-xl transition-all cursor-not-allowed";
+        }
+
+        function selectOption(index) {
+            const data = quizData[currentQIndex];
+            const optionsContainer = document.getElementById('quiz-options');
+            const buttons = optionsContainer.children;
+
+            // Prevent re-selection
+            for (let btn of buttons) {
+                btn.disabled = true;
+            }
+
+            const isCorrect = index === data.answer;
+            if (isCorrect) userScore += 20;
+
+            // Highlight Correct / Incorrect
+            buttons[index].classList.remove('hover:bg-slate-50', 'border-slate-200');
+            if (isCorrect) {
+                buttons[index].classList.add('bg-teal-50', 'border-2', 'border-teal-500', 'text-teal-900');
+            } else {
+                buttons[index].classList.add('bg-red-50', 'border-2', 'border-red-400', 'text-red-900');
+                // Also highlight correct answer
+                buttons[data.answer].classList.remove('border-slate-200');
+                buttons[data.answer].classList.add('bg-teal-50', 'border-2', 'border-teal-500', 'text-teal-900');
+            }
+
+            // Show explanation
+            const expBox = document.getElementById('quiz-explanation');
+            expBox.classList.remove('hidden');
+            if (isCorrect) {
+                expBox.className = "p-4 rounded-xl bg-teal-50 text-teal-900 border border-teal-200 text-xs sm:text-sm leading-relaxed";
+                expBox.innerHTML = `<strong><i class="fa-solid fa-circle-check text-teal-600 mr-1"></i> Jawaban Benar!</strong><br>${data.explanation}`;
+            } else {
+                expBox.className = "p-4 rounded-xl bg-red-50 text-red-900 border border-red-200 text-xs sm:text-sm leading-relaxed";
+                expBox.innerHTML = `<strong><i class="fa-solid fa-circle-xmark text-red-600 mr-1"></i> Jawaban Kurang Tepat!</strong><br>${data.explanation}`;
+            }
+
+            // Update score display
+            document.getElementById('quiz-score-badge').innerText = `Skor Sementara: ${userScore}`;
+
+            // Enable Next Button
+            const nextBtn = document.getElementById('quiz-next-btn');
+            nextBtn.disabled = false;
+            nextBtn.className = "px-6 py-2.5 bg-teal-600 hover:bg-teal-700 text-white font-bold text-sm rounded-xl transition-all shadow-md cursor-pointer";
+        }
+
+        function nextQuestion() {
+            currentQIndex++;
+            if (currentQIndex < quizData.length) {
+                loadQuizQuestion();
+            } else {
+                showQuizResults();
+            }
+        }
+
+        function showQuizResults() {
+            document.getElementById('quiz-container').classList.add('hidden');
+            const resView = document.getElementById('quiz-result');
+            resView.classList.remove('hidden');
+
+            document.getElementById('quiz-final-score').innerText = userScore;
+
+            let gradeMsg = "";
+            if (userScore === 100) gradeMsg = "Luar Biasa! Pemahaman Fisika Anda Sangat Sempurna (Paham Utuh)!";
+            else if (userScore >= 80) gradeMsg = "Sangat Baik! Anda Sudah Memahami Sebagian Besar Konsep Tekanan.";
+            else if (userScore >= 60) gradeMsg = "Cukup Baik. Pelajari Kembali Materi & Eksperimen Lab Virtual.";
+            else gradeMsg = "Perlu Belajar Lagi. Baca Ulang Materi & Coba Praktikum Virtual.";
+
+            document.getElementById('quiz-grade-text').innerText = gradeMsg;
+        }
+
+        function restartQuiz() {
+            currentQIndex = 0;
+            userScore = 0;
+            document.getElementById('quiz-result').classList.add('hidden');
+            document.getElementById('quiz-container').classList.remove('hidden');
+            loadQuizQuestion();
+        }
+
+        function showModal(title, message) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-message').innerText = message;
+            document.getElementById('custom-modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('custom-modal').classList.add('hidden');
+        }
+
+        window.onload = function() {
+            updateCalculator();
+            resizeCanvas();
+            updateLabSimulation();
+            loadQuizQuestion();
+        };
+    </script>
+</body>
+</html>
